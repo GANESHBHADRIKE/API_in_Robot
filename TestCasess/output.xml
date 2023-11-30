@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.1.1 (Python 3.12.0 on win32)" generated="20231130 13:26:11.696" rpa="false" schemaversion="4">
+<suite id="s1" name="Get Responce" source="C:\Users\Ganesh Bhadrike\API_Testing\TestCasess\Get_Responce.robot">
+<test id="s1-t1" name="Get_Wetherinfo" line="18">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>myssion</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20231130 13:26:11.952" level="INFO">Creating Session using : alias=myssion, url=http://api.weatherapi.com/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20231130 13:26:11.952" endtime="20231130 13:26:11.952"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${responce}</var>
+<arg>myssion</arg>
+<arg>url=v1/current.json?key=cfb9aa99fb25495a9ed43258233011&amp;q=London</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20231130 13:26:12.590" level="INFO">GET Request : url=http://api.weatherapi.com/v1/current.json?key=cfb9aa99fb25495a9ed43258233011&amp;q=London 
+ path_url=/v1/current.json?key=cfb9aa99fb25495a9ed43258233011&amp;q=London 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20231130 13:26:12.590" level="INFO">GET Response : url=http://api.weatherapi.com/v1/current.json?key=cfb9aa99fb25495a9ed43258233011&amp;q=London 
+ status=200, reason=OK 
+ headers={'Date': 'Thu, 30 Nov 2023 07:56:12 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Vary': 'Accept-Encoding', 'Server': 'BunnyCDN-DE1-723', 'CDN-PullZone': '93447', 'CDN-Uid': '8fa3a04a-75d9-4707-8056-b7b33c8ac7fe', 'CDN-RequestCountryCode': 'IN', 'Age': '0', 'Cache-Control': 'public, max-age=180', 'Via': '1.1 varnish (Varnish/6.0)', 'x-weatherapi-qpm-left': '5000000', 'X-Varnish': '180823254', 'CDN-ProxyVer': '1.04', 'CDN-RequestPullSuccess': 'True', 'CDN-RequestPullCode': '200', 'CDN-CachedAt': '11/30/2023 07:53:39', 'CDN-EdgeStorageId': '755', 'CDN-Status': '200', 'CDN-RequestId': '6b4a7ae1354ff8e81bc082a9d507bf42', 'CDN-Cache': 'HIT', 'Content-Encoding': 'gzip'} 
+ body={"location":{"name":"London","region":"City of London, Greater London","country":"United Kingdom","lat":51.52,"lon":-0.11,"tz_id":"Europe/London","localtime_epoch":1701330764,"localtime":"2023-11-30 7:52"},"current":{"last_updated_epoch":1701330300,"last_updated":"2023-11-30 07:45","temp_c":-1.0,"temp_f":30.2,"is_day":1,"condition":{"text":"Mist","icon":"//cdn.weatherapi.com/weather/64x64/day/143.png","code":1030},"wind_mph":6.9,"wind_kph":11.2,"wind_degree":30,"wind_dir":"NNE","pressure_mb":1002.0,"pressure_in":29.59,"precip_mm":0.0,"precip_in":0.0,"humidity":93,"cloud":25,"feelslike_c":-4.7,"feelslike_f":23.5,"vis_km":3.0,"vis_miles":1.0,"uv":1.0,"gust_mph":10.5,"gust_kph":17.0}} 
+ </msg>
+<msg timestamp="20231130 13:26:12.590" level="INFO">${responce} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20231130 13:26:11.956" endtime="20231130 13:26:12.590"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Header: ${responce.headers}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20231130 13:26:12.590" endtime="20231130 13:26:12.606"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Status: ${responce.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20231130 13:26:12.606" endtime="20231130 13:26:12.606"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>content: ${responce.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20231130 13:26:12.606" endtime="20231130 13:26:12.610"/>
+</kw>
+<kw name="Load Json From File" library="JSONLibrary">
+<var>${json_data}</var>
+<arg>C:/Users/Ganesh Bhadrike/API_Testing/file/data.json</arg>
+<doc>Load JSON from file.</doc>
+<msg timestamp="20231130 13:26:12.612" level="INFO">${json_data} = {'location': {'name': 'London', 'region': 'City of London, Greater London', 'country': 'United Kingdom', 'lat': 51.52, 'lon': -0.11, 'tz_id': 'Europe/London', 'localtime_epoch': 1701327340, 'localtime...</msg>
+<status status="PASS" starttime="20231130 13:26:12.612" endtime="20231130 13:26:12.612"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${value_from_path}</var>
+<arg>${json_data}</arg>
+<arg>$.location.name</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20231130 13:26:12.648" level="INFO">${value_from_path} = ['London']</msg>
+<status status="PASS" starttime="20231130 13:26:12.612" endtime="20231130 13:26:12.648"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>value is: ${value_from_path}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20231130 13:26:12.648" endtime="20231130 13:26:12.648"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${value_from_path}</var>
+<arg>${value_from_path}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20231130 13:26:12.648" level="INFO">${value_from_path} = ['London']</msg>
+<status status="PASS" starttime="20231130 13:26:12.648" endtime="20231130 13:26:12.648"/>
+</kw>
+<kw name="Remove String Using Regexp" library="String">
+<var>${value_from_path}</var>
+<arg>${value_from_path}</arg>
+<arg>[''\\[\\],]</arg>
+<doc>Removes ``patterns`` from the given ``string``.</doc>
+<msg timestamp="20231130 13:26:12.648" level="INFO">${value_from_path} = London</msg>
+<status status="PASS" starttime="20231130 13:26:12.648" endtime="20231130 13:26:12.648"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>value is: ${value_from_path}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20231130 13:26:12.648" endtime="20231130 13:26:12.648"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${value_from_path}</arg>
+<arg>London</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20231130 13:26:12.648" endtime="20231130 13:26:12.648"/>
+</kw>
+<status status="PASS" starttime="20231130 13:26:11.952" endtime="20231130 13:26:12.655"/>
+</test>
+<status status="PASS" starttime="20231130 13:26:11.696" endtime="20231130 13:26:12.655"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Get Responce">Get Responce</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
